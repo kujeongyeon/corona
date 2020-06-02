@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.wordMapper">
+   <select id="wordList" resultType="com.spring.WordVO">
+            SELECT
+                 idx,sentence,content,category
+             FROM
+                  word
+        </select>
+   <select id="wordTestList" resultType="com.spring.WordVO">
+            SELECT
+                 idx,sentence,content,category
+             FROM
+                  word
+             WHERE category = #{category}
+        </select>
+   <insert id="wordadd" parameterType="com.spring.WordVO">
+   		INSERT INTO word (sentence,content,category) 
+   		VALUES (#{sentence},#{content},#{category})
+   </insert>
+</mapper>

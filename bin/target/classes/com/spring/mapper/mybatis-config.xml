@@ -5,6 +5,5 @@
 <configuration>
 	<mappers>
 		<mapper resource="com/spring/mapper/memberMapper.xml" />
-		<mapper resource="com/spring/mapper/wordMapper.xml" />
 	</mappers>
 </configuration>
