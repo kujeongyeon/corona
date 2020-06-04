@@ -1,5 +1,7 @@
 package com.spring;
 
+import java.util.List;
+
 public class WordVO {
 	
 	private Integer idx;
@@ -7,6 +9,14 @@ public class WordVO {
 	private String content;
 	private String category;
 	
+	private List<WordVO> wordVoList;
+	
+	public List<WordVO> getWordVoList() {
+		return wordVoList;
+	}
+	public void setWordVoList(List<WordVO> wordVoList) {
+		this.wordVoList = wordVoList;
+	}
 	public Integer getIdx() {
 		return idx;
 	}

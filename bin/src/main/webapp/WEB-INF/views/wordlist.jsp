@@ -92,26 +92,26 @@
   <p class="lead">영어문장 테이블</p>
    	<table class="table table-sm table-striped table-dark">
    	<colgroup>
-		<col width="15%">
+		<col width="5%">
+		<col width="45%">
 		<col width="40%">
-		<col width="35%">
 		<col width="10%">
 	</colgroup>
   <thead>
     <tr>
-      <th scope="col">그룹</th>
+      <th scope="col"></th>
       <th scope="col">문장</th>
       <th scope="col">뜻</th>
-      <th scope="col"></th>
+      <th scope="col">음성</th>
     </tr>
   </thead>
   <tbody>
   <c:forEach items="${list}" var="word">
   <tr>
-  	<td>${word.category}</td>
+  	<td>${word.idx}</td>
   	<td>${word.sentence}</td>
   	<td>${word.content}</td>
-  	<td>-</td>
+  	<td>${word.category}</td>
   </tr>
   </c:forEach>
  

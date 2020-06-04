@@ -33,5 +33,10 @@ public class WordDaoImpl implements WordDao {
 		
 		return sqlsession.selectList(mapper+"wordTestList",wordVo);
 	}
+
+	@Override
+	public String wordCompare(Integer idx) {
+		return sqlsession.selectOne(mapper+"wordCompare", idx);
+	}
     
 }

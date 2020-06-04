@@ -1,7 +1,9 @@
 package com.spring.service;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -56,6 +58,38 @@ public class WordServiceImpl implements WordService{
 		}
 		
 		return list;
+	}
+
+
+	@Override
+	public Map<String,String> wordCompare(List<WordVO> wordlist) {
+		
+		int all = wordlist.size();
+		int success = all;
+		String idx = "";
+		String senten = "";
+		
+		for (int i = 0; i < wordlist.size(); i++) {
+			
+			String origin_sentence = dao.wordCompare(wordlist.get(i).getIdx());
+			String sentence = wordlist.get(i).getSentence();
+			String origin_sentence_ver = origin_sentence.replaceAll("\\p{Z}", "");
+			sentence = sentence.replaceAll("\\p{Z}", "");
+			
+			if(!origin_sentence_ver.equals(sentence)) {
+				success -= 1;
+				idx +=  wordlist.get(i).getIdx() + ",";
+				senten += origin_sentence + ",";
+			}
+		}
+		Map<String,String> result = new HashMap<String,String>();
+		
+		result.put("success", success+"");
+		result.put("fail", all-success+"");
+		result.put("idx", idx);
+		result.put("senten", senten);
+		
+		return result;
 	}
    
 }

@@ -16,11 +16,6 @@
                   word
              WHERE category = #{category}
         </select>
-    <select id="wordCompare" resultType="String">
-    	SELECT sentence
-    	FROM word
-    	WHERE idx = #{idx}
-    </select>
    <insert id="wordadd" parameterType="com.spring.WordVO">
    		INSERT INTO word (sentence,content,category) 
    		VALUES (#{sentence},#{content},#{category})

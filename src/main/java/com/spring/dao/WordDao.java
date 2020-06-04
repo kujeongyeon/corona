@@ -11,5 +11,7 @@ public interface WordDao {
 	void wordadd(WordVO wordVo);
 
 	List<WordVO> wordTestList(WordVO wordVo);
+
+	String wordCompare(Integer idx);
   
 }

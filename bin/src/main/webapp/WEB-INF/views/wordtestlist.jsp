@@ -42,11 +42,6 @@
 	  box-shadow: none;
 	} 
 
-	.text-under{
-		color:red;
-		display: flex;
-	}
-	
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -72,25 +67,28 @@
   <main role="main" class="inner cover">
     <h1 class="cover-heading">문장 테스트</h1>
      <hr class="my-4">
- <div id="result"></div>
-    <form id="frm">
-  <c:forEach items="${list}" var="word" varStatus="status">
+    <form>
+  <c:forEach items="${list}" var="word">
   <div class="form-group">
   <div class="row"> 
-  <label class="control-label" class="col-sm-1 col-form-label" >${status.count}.</label>
+  <label class="control-label" class="col-sm-1 col-form-label" ></label>
   <label class="control-label" class="col-sm-10 col-form-label" >${word.content}</label>
   </div>
-  <input type="hidden" name="wordVoList[${status.count-1}].idx" value="${word.idx}">
-  <input type="text" name="wordVoList[${status.count-1}].sentence" class="form-control" id="content" value="${word.sentence}">
-      <small id="under-${word.idx}" class="text-under"></small>
+  <input type="text" class="form-control" id="content" value="${word.sentence}">
 </div>
 </c:forEach>
+  <!-- <div class="form-group">
+  <div class="row"> 
+  <label class="control-label" class="col-sm-1 col-form-label" >2.</label>
+  <label class="control-label" class="col-sm-10 col-form-label" >성공은 너의 삶의 투쟁으로부터 자라난다</label>
+  </div>
+  <input type="text" class="form-control" id="content" value="your success">
+</div> -->
       <hr class="my-4">
-</form> 
   <div class="col-sm-3">
-      <button id="submitbutton" class="btn btn-dark mb-2">정답제출</button>
+      <button type="submit" class="btn btn-dark mb-2">정답제출</button>
     </div>
-
+</form> 
   </main>
 
   <footer class="mastfoot mt-auto">
@@ -99,34 +97,5 @@
     </div>
   </footer>
 </div>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-	$('#submitbutton').on('click',function(){
-		$.ajax({
-			url: "/coronasite/wordresult.do",
-			type: "POST",
-			dataType:"JSON",
-			data: $("#frm").serialize(),
-			 success : function(data) {
-				 
-				 if(data.error){
-					 alert(data.error);
-					 return false;
-				 }
-				 var stringJson = JSON.stringify(data);
-                 console.log(stringJson);
-				 
-				 $.each(data.content,function(key,val){
-					 
-					 $('#under-'+val.idx).text(val.setence);
-				 })
-				  
-				$('#result').text(data.result);
-				},
-				error : function(xhr, status , error){console.log("ajax ERROR!!! : " );}
-			})
-	})
-</script>
-
 </body>
 </html>
