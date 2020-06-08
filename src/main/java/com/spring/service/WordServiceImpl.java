@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.Category;
 import com.spring.WordVO;
 import com.spring.dao.WordDao;
 
@@ -90,6 +91,19 @@ public class WordServiceImpl implements WordService{
 		result.put("senten", senten);
 		
 		return result;
+	}
+
+
+	@Override
+	public List<Category> categorylist(Category category) {
+		
+		return dao.categoryList(category);
+	}
+
+
+	@Override
+	public void categoryadd(Category category) {
+		dao.categoryAdd(category);
 	}
    
 }

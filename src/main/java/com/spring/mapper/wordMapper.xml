@@ -15,7 +15,13 @@
              FROM
                   word
              WHERE category = #{category}
-        </select>
+    </select>
+   <select id="categoryList" resultType="com.spring.Category">
+            SELECT
+                 idx,cate
+             FROM
+                  category
+    </select>
     <select id="wordCompare" resultType="String">
     	SELECT sentence
     	FROM word
@@ -24,5 +30,9 @@
    <insert id="wordadd" parameterType="com.spring.WordVO">
    		INSERT INTO word (sentence,content,category) 
    		VALUES (#{sentence},#{content},#{category})
+   </insert>
+   <insert id="categoryAdd" parameterType="com.spring.Category">
+   		INSERT INTO category (cate) 
+   		VALUES (#{cate})
    </insert>
 </mapper>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.spring.Category;
 import com.spring.WordVO;
 import com.spring.service.WordService;
 
@@ -36,32 +37,58 @@ public class wordController {
 	    }
 	    
 	    @RequestMapping("/wordlist.do")
-	    public String wordlist(WordVO wordVo, Model model) throws Exception{
+	    public String wordlist(WordVO wordVo,Category category, Model model) throws Exception{
 	       
 	    	List<WordVO> list = service.wordlist(wordVo);
 	    	model.addAttribute("list",list);
 	    	
+	    	List<Category> categorylist = service.categorylist(category);
+	    	model.addAttribute("categorylist",categorylist);
+	    	
 	        return "wordlist";
 	    }
 	    @RequestMapping("/wordadd.do")
-	    public String wordadd(HttpServletRequest req,WordVO wordVo, Model model) throws Exception{
+	    public String wordadd(HttpServletRequest req,WordVO wordVo, Category category, Model model) throws Exception{
 	    	
 	    	//service.wordadd(wordVo);
-	    	wordVo.setCategory(req.getParameter("category"));
+	    	String cate = req.getParameter("category_input");
+	    	String cate_select = req.getParameter("category_select");
+	    	
+	    	if(cate==null)
+	    		cate = cate_select;
+	    	
+	    	wordVo.setCategory(cate);
 	    	wordVo.setSentence(req.getParameter("sentence"));
 	    	wordVo.setContent(req.getParameter("content"));
 	    	
 	    	service.wordadd(wordVo);
 	    	
+	    	boolean categoryUse = false;
+	    	List<Category> categorylist = service.categorylist(category);
+	    	System.out.println(cate+","+categorylist.size());
+	    	for (int i = 0; i < categorylist.size(); i++) {
+				if(cate.equals(categorylist.get(i).getCate())) {
+					categoryUse = true;
+				}
+			}
+	    	if(!categoryUse) {
+	    		category.setCate(cate);
+	    		service.categoryadd(category);
+	    		categorylist.add(category);
+	    	}
+	    	
+	    	
 	    	List<WordVO> list = service.wordlist(wordVo);
 	    	model.addAttribute("list",list);
-	    	
+	    	model.addAttribute("categorylist",categorylist);
 	    	return "wordlist";
 	    }
 	    
 	    @RequestMapping("/wordtest.do")
-	    public String wordtest(Model model) throws Exception{
-	       
+	    public String wordtest(Model model,Category category) throws Exception{
+	    	
+	    	List<Category> categorylist = service.categorylist(category);
+	    	model.addAttribute("categorylist",categorylist);
 	    	
 	        return "wordtest";
 	    }

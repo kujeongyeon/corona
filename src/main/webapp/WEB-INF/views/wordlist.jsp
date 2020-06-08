@@ -34,7 +34,7 @@
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/assets/cover.css" rel="stylesheet">
   </head>
-  <body class="text-center">
+  <body class="text-center">  
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   <header class="masthead mb-auto">
     <div class="inner">
@@ -51,15 +51,17 @@
     <hr class="my-4">
 <form action="/coronasite/wordadd.do">
 	  <div class="form-group row">
-	    <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">단원</label>
-	    <div class="col-sm-2">
-	    <select name="category" class="form-control" id="exampleFormControlSelect1">
-	      <option>1</option>
-	      <option>2</option>
-	      <option>3</option>
-	      <option>4</option>
-	      <option>5</option>
+	    <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">그룹</label>
+	    <div class="col-sm-3">
+	    <select id="category_select" name="category_select" class="form-control" id="exampleFormControlSelect1">
+	    <c:forEach items="${categorylist}" var="category">
+	      <option value="${category.cate}">${category.cate}</option>
+	    </c:forEach>
+	    <option value="make" selected="selected">직접입력</option>
 	    </select>
+	  </div>
+	   <div class="col-sm-6">
+	  <input type="text" name="category_input" id="category_input" class="form-control" id="formGroupExampleInput">
 	  </div>
   </div>
    <div class="form-group row">
@@ -126,5 +128,34 @@
     </div>
   </footer>
 </div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
+	<script type="text/javascript">
+	
+	/* 	$('#category_select').on("change",function(){
+			$(this).val("make").prop("selected",true);
+		}); */
+		/* $('#category_select').change(function(){
+			alert(this.value);
+		})
+		 */
+		
+		$(document).ready(function(){
+			$("#category_select").selectmenu();
+		})
+		 
+		$('#category_select').on("change",function(){
+		//	$("#category_select option:selected").each(function(){
+				
+				if($(this).val()=="make"){
+					$("#category_input").val('');
+					$("#category_input").attr("disabled",false);					
+				}else{
+					$("#category_input").val($(this).val());
+					$("#category_input").attr("disabled",true);					
+				}
+			//})
+		});
+		
+	</script>	
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import java.util.List;
 
+import com.spring.Category;
 import com.spring.WordVO;
 
 public interface WordDao {
@@ -13,5 +14,9 @@ public interface WordDao {
 	List<WordVO> wordTestList(WordVO wordVo);
 
 	String wordCompare(Integer idx);
+
+	List<Category> categoryList(Category category);
+
+	void categoryAdd(Category category);
   
 }

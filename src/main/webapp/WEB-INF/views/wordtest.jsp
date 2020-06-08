@@ -53,15 +53,15 @@
     <form action="/coronasite/wordtestlist.do">
      <div class="col-sm">
     <div class="form-group row">
-	    <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">단원</label>
+	    <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">그룹</label>
 	    <div class="col-sm-6">
-	    <select name="category" class="form-control" id="exampleFormControlSelect1">
-	      <option>1</option>
-	      <option>2</option>
-	      <option>3</option>
-	      <option>4</option>
-	      <option>5</option>
+	    
+	    <select id="category" name="category" class="form-control" id="exampleFormControlSelect1">
+	    <c:forEach items="${categorylist}" var="category">
+	      <option value="${category.cate}">${category.cate}</option>
+	    </c:forEach>
 	    </select>
+	    
 	  </div>
   </div>
   </div>

@@ -5,11 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.Category;
 import com.spring.WordVO;
- 
+
 @Repository
 public class WordDaoImpl implements WordDao {
 	@Inject
@@ -37,6 +37,16 @@ public class WordDaoImpl implements WordDao {
 	@Override
 	public String wordCompare(Integer idx) {
 		return sqlsession.selectOne(mapper+"wordCompare", idx);
+	}
+
+	@Override
+	public List<Category> categoryList(Category category) {
+		return sqlsession.selectList(mapper+"categoryList",category);
+	}
+
+	@Override
+	public void categoryAdd(Category category) {
+		sqlsession.insert(mapper+"categoryAdd",category);
 	}
     
 }
